@@ -1,0 +1,100 @@
+<!-- strobe.html -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- FAVICON -->
+	<link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Koulen&family=Sofia+Sans+Condensed:ital,wght@0,1;0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,1;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="./styles.css">
+
+	<!-- JS -->
+	<script type="text/javascript" src="./scripts.js" defer></script>
+
+	<!-- TITLE -->
+	<title>Strobe</title>
+
+</head>
+<body>
+
+<!-- STROBE -->
+<div id="strobe">
+	<div id="outer-top-left" class="outer-quadrant"></div>
+	<div id="outer-top-right" class="outer-quadrant"></div>
+	<div id="outer-bottom-right" class="outer-quadrant"></div>
+	<div id="outer-bottom-left" class="outer-quadrant"></div>
+	<!-- CENTER -->
+	<div id="center-circle">
+		<div id="inner-top-left" class="inner-quadrant"></div>
+		<div id="inner-top-right" class="inner-quadrant"></div>
+		<div id="inner-bottom-right" class="inner-quadrant"></div>
+		<div id="inner-bottom-left" class="inner-quadrant"></div>
+	</div>
+</div>
+
+<!-- CONTROLS -->
+<div id="controls">
+	<h3>Strobe Settings</h3>
+	<label for="input-color-primary">Primary Color</label>
+	<input type="color" id="input-color-primary" 
+		name="input-color-primary" value="#000000">
+
+	<label for="input-color-secondary">Secondary Color</label>
+	<input type="color" id="input-color-secondary" 
+		name="input-color-primary" value="#ffffff">
+
+	<label for="input-speed-inner">Inner Speed</label>
+	<input type="range" id="input-speed-inner"
+		name="input-speed-inner" 
+		min="0.1" max="20" step="0.1" value="3.8">
+
+	<label for="input-speed-outer">Outer Speed</label>
+	<input type="range" id="input-speed-outer"
+		name="input-speed-outer" 
+		min="0.1" max="20" step="0.1" value="9.1">
+
+	<label for="input-stripe-inner">Inner Stripe</label>
+	<input type="range" id="input-stripe-inner"
+		name="input-stripe-inner" 
+		min="1" max="100" step="1" value="12">
+
+	<label for="input-stripe-outer">Outer Stripe</label>
+	<input type="range" id="input-stripe-outer"
+		name="input-stripe-outer" 
+		min="1" max="100" step="1" value="12">
+
+	<label for="input-inner-multiplier">Inner Multiplier</label>
+	<input type="range" id="input-inner-multiplier"
+		name="input-inner-multiplier" 
+		min="0.1" max="10" step="0.1" value="6">
+
+	<label for="input-outer-multiplier">Outer Multiplier</label>
+	<input type="range" id="input-outer-multiplier"
+		name="input-outer-multiplier" 
+		min="0.1" max="10" step="0.1" value="0.7">
+
+	<label for="input-inner-distance">Inner Distance</label>
+	<input type="range" id="input-inner-distance"
+		name="input-inner-distance" 
+		min="0" max="800" step="1" value="72">
+
+	<label for="input-outer-distance">Outer Distance</label>
+	<input type="range" id="input-outer-distance"
+		name="input-outer-distance" 
+		min="0" max="1600" step="1" value="1372">
+</div>
+
+<!-- FULLSCREEN -->
+<span id="fullscreen" class="material-symbols-outlined">fullscreen</span>
+
+</body>
+</html>

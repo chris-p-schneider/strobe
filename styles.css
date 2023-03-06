@@ -1,0 +1,327 @@
+/* -------- styles.css --------- */
+/* strobe styles and animations */
+/* --------------------------- */
+
+:root {
+	/* Stripe colors */
+	--primary: black;
+	--secondary: white;
+
+	/* Relative scroll speeds */
+	--inner-speed: 3.8s;
+	--outer-speed: 9.1s;
+
+	/* Stripe sizes */ 
+	--inner-stripe: 12px;
+	--outer-stripe: 12px;
+
+	/* Multiplier to scale scroll distance */
+	--inner-multiplier: 6;
+	--outer-multiplier: 0.7;
+
+	/* Distance each section scrolls to */
+	--inner-distance-base: 72px;
+	--outer-distance-base: 1372px;
+	--inner-distance: calc(var(--inner-distance-base) * var(--inner-multiplier));
+	--outer-distance: calc(var(--outer-distance-base) * var(--outer-multiplier));
+}
+
+/*****************************************/
+
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+	overflow: hidden;
+}
+html, body, div {
+	padding: 0;
+	margin: 0;
+}
+
+/*****************************************/
+
+#strobe {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.outer-quadrant {
+	background-color: white;
+	width: 50vw;
+	height: 50vh;
+}
+
+/*****************************************/
+
+#outer-top-left {
+	animation: outer-northwest var(--outer-speed) linear infinite;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: repeating-linear-gradient(
+	  	-45deg,
+	 	var(--secondary),
+	  	var(--secondary) var(--outer-stripe),
+	  	var(--primary) var(--outer-stripe),
+	  	var(--primary) calc(var(--outer-stripe) * 2)
+	);
+}
+#outer-top-right {
+	animation: outer-northeast var(--outer-speed) linear infinite;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-image: repeating-linear-gradient(
+	  	45deg,
+	 	var(--secondary),
+	  	var(--secondary) var(--outer-stripe),
+	  	var(--primary) var(--outer-stripe),
+	  	var(--primary) calc(var(--outer-stripe) * 2)
+	);
+}
+#outer-bottom-right {
+	animation: outer-southeast var(--outer-speed) linear infinite;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-image: repeating-linear-gradient(
+	  	-45deg,
+	 	var(--primary),
+	  	var(--primary) var(--outer-stripe),
+	  	var(--secondary) var(--outer-stripe),
+	  	var(--secondary) calc(var(--outer-stripe) * 2)
+	);
+}
+#outer-bottom-left {
+	animation: outer-southwest var(--outer-speed) linear infinite;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-image: repeating-linear-gradient(
+	  	45deg,
+	 	var(--primary),
+	  	var(--primary) var(--outer-stripe),
+	  	var(--secondary) var(--outer-stripe),
+	  	var(--secondary) calc(var(--outer-stripe) * 2)
+	);
+}
+
+/*****************************************/
+
+#center-circle {
+	background-color: white;
+	position: absolute;
+	top: calc(calc(100% - min(50vw, 75vh)) / 2);
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: min(50vw, 75vh);
+	height: min(50vw, 75vh);
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.inner-quadrant {
+	position: relative;
+	width: min(25vw, calc(75vh / 2));
+	height: min(25vw, calc(75vh / 2));
+}
+
+/*****************************************/
+
+#inner-top-left {
+	animation: inner-southeast var(--inner-speed) linear infinite;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: repeating-linear-gradient(
+	  	-45deg,
+	 	var(--primary),
+	  	var(--primary) var(--inner-stripe),
+	  	var(--secondary) var(--inner-stripe),
+	  	var(--secondary) calc(var(--inner-stripe) * 2)
+	);
+}
+#inner-top-right {
+	animation: inner-southwest var(--inner-speed) linear infinite;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-image: repeating-linear-gradient(
+	  	45deg,
+	 	var(--primary),
+	  	var(--primary) var(--inner-stripe),
+	  	var(--secondary) var(--inner-stripe),
+	  	var(--secondary) calc(var(--inner-stripe) * 2)
+	);
+}
+#inner-bottom-right {
+	animation: inner-northwest var(--inner-speed) linear infinite;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-image: repeating-linear-gradient(
+	  	-45deg,
+	 	var(--secondary),
+	  	var(--secondary) var(--inner-stripe),
+	  	var(--primary) var(--inner-stripe),
+	  	var(--primary) calc(var(--inner-stripe) * 2)
+	);
+}
+#inner-bottom-left {
+	animation: inner-northeast var(--inner-speed) linear infinite;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background-image: repeating-linear-gradient(
+	  	45deg,
+	 	var(--secondary),
+	  	var(--secondary) var(--inner-stripe),
+	  	var(--primary) var(--inner-stripe),
+	  	var(--primary) calc(var(--inner-stripe) * 2)
+	);
+}
+
+/*****************************************/
+
+@keyframes inner-southeast {
+	from { background-position: 0 0; }
+	to { background-position: 
+		var(--inner-distance) 
+		var(--inner-distance) }
+}
+
+@keyframes inner-southwest {
+	from { background-position: 0 0; }
+	to { background-position: 
+		calc(var(--inner-distance) * -1) 
+		var(--inner-distance) }
+}
+
+@keyframes inner-northwest {
+	from { background-position: 0 0; }
+	to { background-position: 
+		calc(var(--inner-distance) * -1) 
+		calc(var(--inner-distance) * -1) }
+}
+
+@keyframes inner-northeast {
+	from { background-position: 0 0; }
+	to { background-position: 
+		var(--inner-distance) 
+		calc(var(--inner-distance) * -1) }
+}
+
+/*****************************************/
+
+@keyframes outer-southeast {
+	from { background-position: 0 0; }
+	to { background-position: 
+		var(--outer-distance) 
+		var(--outer-distance) }
+}
+
+@keyframes outer-southwest {
+	from { background-position: 0 0; }
+	to { background-position: 
+		calc(var(--outer-distance) * -1) 
+		var(--outer-distance) }
+}
+
+@keyframes outer-northwest {
+	from { background-position: 0 0; }
+	to { background-position: 
+		calc(var(--outer-distance) * -1) 
+		calc(var(--outer-distance) * -1) }
+}
+
+@keyframes outer-northeast {
+	from { background-position: 0 0; }
+	to { background-position: 
+		var(--outer-distance) 
+		calc(var(--outer-distance) * -1) }
+}
+
+/*****************************************/
+
+#controls {
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+
+	background-color: white;
+	position: absolute;
+	bottom: 25%;
+	right: 10px;
+
+	padding: 10px 20px;
+	margin: 0;
+	border: 1.5px solid black;
+	border-radius: 15px;
+	filter: drop-shadow(0 0 7px black);
+
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#controls:hover {
+	opacity: 1;
+}
+
+#controls h3 {
+	font-family: 'Koulen', cursive;
+	font-size: 1.5em;
+	margin: 0;
+}
+
+#controls label {
+	font-family: 'Sofia Sans Condensed', sans-serif;
+	margin: 5px 0 0 0;
+}
+
+#controls input {
+	margin: 0 0 5px 0;
+}
+
+#controls input:hover {
+	cursor: pointer;
+}
+
+/*****************************************/
+
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 48
+}
+
+#fullscreen {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	
+	font-size: 48px;
+	color: white;
+	filter: drop-shadow(0 0 3px black);
+
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+}
+
+#fullscreen:hover {
+	cursor: pointer;
+	opacity: 1;
+}
