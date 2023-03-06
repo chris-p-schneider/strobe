@@ -9,3 +9,5 @@ One-day project taking a crack at recreating the [Neave Strobe](https://strobe.c
 ![Screenshot of Strobe with menu](./strobe.png "Strobe Screenshot")
 
 ⚠ Note: this strobe effect may not be suitable for people with photosensitive epilepsy or sensitivity to flashing lights.
+
+You can interact with a live demo [here](https://htmlpreview.github.io/?https://github.com/chris-p-schneider/strobe/blob/main/strobe.html).
