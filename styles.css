@@ -24,6 +24,12 @@
 	--outer-distance-base: 1372px;
 	--inner-distance: calc(var(--inner-distance-base) * var(--inner-multiplier));
 	--outer-distance: calc(var(--outer-distance-base) * var(--outer-multiplier));
+
+	/* New minimum strobe size reduces hiccups */
+	/* Too large of a value and rendering slows */
+	/* Converting to svg might work better? */
+	--inner-strobe-size: min(100vw, 1000px);
+	--outer-strobe-size: min(200vw, 2000px);
 }
 
 /*****************************************/
@@ -49,18 +55,42 @@ html, body, div {
 }
 
 .outer-quadrant {
+	position: absolute;
 	background-color: white;
 	width: 50vw;
 	height: 50vh;
+	overflow: hidden;
 }
 
 /*****************************************/
 
 #outer-top-left {
-	animation: outer-northwest var(--outer-speed) linear infinite;
-	position: absolute;
 	top: 0;
 	left: 0;
+}
+#outer-top-right {
+	top: 0;
+	right: 0;
+}
+#outer-bottom-right {
+	bottom: 0;
+	right: 0;
+}
+#outer-bottom-left {
+	bottom: 0;
+	left: 0;
+}
+
+/*****************************************/
+
+#outer-top-left-strobe, #outer-top-right-strobe,
+#outer-bottom-right-strobe, #outer-bottom-left-strobe {
+	position: relative;
+	width: var(--outer-strobe-size);
+	height: var(--outer-strobe-size);
+}
+#outer-top-left-strobe {
+	animation: outer-northwest var(--outer-speed) linear infinite;
 	background-image: repeating-linear-gradient(
 	  	-45deg,
 	 	var(--secondary),
@@ -69,11 +99,10 @@ html, body, div {
 	  	var(--primary) calc(var(--outer-stripe) * 2)
 	);
 }
-#outer-top-right {
+#outer-top-right-strobe {
+	transform: translate(
+		calc(-1 * calc(var(--outer-strobe-size) - 50vw)));
 	animation: outer-northeast var(--outer-speed) linear infinite;
-	position: absolute;
-	top: 0;
-	right: 0;
 	background-image: repeating-linear-gradient(
 	  	45deg,
 	 	var(--secondary),
@@ -82,11 +111,13 @@ html, body, div {
 	  	var(--primary) calc(var(--outer-stripe) * 2)
 	);
 }
-#outer-bottom-right {
+#outer-bottom-right-strobe {
+	transform: translate(
+		calc(-1 * calc(var(--outer-strobe-size) - 50vw)),
+		calc(-1 * calc(var(--outer-strobe-size) - 
+			calc(calc(100% - min(50vw, 75vh)) / 2)))
+	);
 	animation: outer-southeast var(--outer-speed) linear infinite;
-	position: absolute;
-	bottom: 0;
-	right: 0;
 	background-image: repeating-linear-gradient(
 	  	-45deg,
 	 	var(--primary),
@@ -94,12 +125,15 @@ html, body, div {
 	  	var(--secondary) var(--outer-stripe),
 	  	var(--secondary) calc(var(--outer-stripe) * 2)
 	);
-}
-#outer-bottom-left {
+} 
+#outer-bottom-left-strobe {
+	transform: translate(
+		0,
+		calc(-1 * calc(var(--outer-strobe-size) - 
+			calc(calc(100% - min(50vw, 75vh)) / 2)))
+	);
+
 	animation: outer-southwest var(--outer-speed) linear infinite;
-	position: absolute;
-	bottom: 0;
-	left: 0;
 	background-image: repeating-linear-gradient(
 	  	45deg,
 	 	var(--primary),
@@ -124,19 +158,45 @@ html, body, div {
 	overflow: hidden;
 }
 
+/*****************************************/
+
 .inner-quadrant {
-	position: relative;
+	position: absolute;
 	width: min(25vw, calc(75vh / 2));
 	height: min(25vw, calc(75vh / 2));
 }
 
-/*****************************************/
-
 #inner-top-left {
-	animation: inner-southeast var(--inner-speed) linear infinite;
-	position: absolute;
 	top: 0;
 	left: 0;
+}
+#inner-top-right {
+	top: 0;
+	right: 0;
+}
+#inner-bottom-right {
+	right: 0;
+	bottom: 0;
+}
+#inner-bottom-left {
+	left: 0;
+	bottom: 0;
+}
+
+/*****************************************/
+
+#inner-top-left-strobe, #inner-top-right-strobe,
+#inner-bottom-right-strobe, #inner-bottom-left-strobe {
+	position: absolute;
+	width: var(--inner-strobe-size);
+	height: var(--inner-strobe-size);
+	object-fit: cover;
+}
+
+#inner-top-left-strobe {
+	bottom: 0;
+	right: 0;
+	animation: inner-southeast var(--inner-speed) linear infinite;
 	background-image: repeating-linear-gradient(
 	  	-45deg,
 	 	var(--primary),
@@ -145,11 +205,10 @@ html, body, div {
 	  	var(--secondary) calc(var(--inner-stripe) * 2)
 	);
 }
-#inner-top-right {
+#inner-top-right-strobe {
+	bottom: 0;
+	left: 0;
 	animation: inner-southwest var(--inner-speed) linear infinite;
-	position: absolute;
-	top: 0;
-	right: 0;
 	background-image: repeating-linear-gradient(
 	  	45deg,
 	 	var(--primary),
@@ -158,11 +217,10 @@ html, body, div {
 	  	var(--secondary) calc(var(--inner-stripe) * 2)
 	);
 }
-#inner-bottom-right {
+#inner-bottom-right-strobe {
+	top: 0;
+	left: 0;
 	animation: inner-northwest var(--inner-speed) linear infinite;
-	position: absolute;
-	right: 0;
-	bottom: 0;
 	background-image: repeating-linear-gradient(
 	  	-45deg,
 	 	var(--secondary),
@@ -170,12 +228,12 @@ html, body, div {
 	  	var(--primary) var(--inner-stripe),
 	  	var(--primary) calc(var(--inner-stripe) * 2)
 	);
+
 }
-#inner-bottom-left {
+#inner-bottom-left-strobe {
+	top: 0;
+	right: 0;
 	animation: inner-northeast var(--inner-speed) linear infinite;
-	position: absolute;
-	left: 0;
-	bottom: 0;
 	background-image: repeating-linear-gradient(
 	  	45deg,
 	 	var(--secondary),
